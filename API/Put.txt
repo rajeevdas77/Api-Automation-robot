@@ -1,0 +1,40 @@
+*** Settings ***
+Documentation       Robot Framework Demo - PUT Request Example
+Library             Collections
+Library             JSONLibrary
+Library             RequestsLibrary
+
+*** Variables ***
+${base_url}         https://reqres.in
+
+*** Test Cases ***
+Test PUT Request
+    [Tags]          Demo
+    # Create a session for the API requests
+    Create Session  session1    ${base_url}    disable_warnings=1
+
+    # Define the endpoint and the payload
+    ${endpoint}=     Set Variable    /api/users/2
+    ${payload}=      Create Dictionary    name=Jane Doe    job=Manager
+
+    # Send a PUT request
+    ${response}=     PUT On Session   session1    ${endpoint}    json=${payload}
+
+    # Log response details
+    Log To Console   ${response.headers}
+    Log To Console   ${response.status_code}
+    Log To Console   ${response.content}
+
+    # Validate the response status code
+    ${status_code}=  Convert To String    ${response.status_code}
+    Should Be Equal  ${status_code}      200
+
+    # Validate response content
+    ${json_response}=  Evaluate   json.loads('''${response.content}''')   json
+    ${name}=           Get From Dictionary   ${json_response}   name
+    ${job}=            Get From Dictionary   ${json_response}   job
+    ${updatedAt}=      Get From Dictionary   ${json_response}   updatedAt
+
+    Should Be Equal    ${name}     Jane Doe
+    Should Be Equal    ${job}      Manager
+    Should Not Be Empty  ${updatedAt}

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.1.1 (Python 3.12.3 on win32)" generated="2024-12-28T11:04:06.366641" rpa="false" schemaversion="5">
+<suite id="s1" name="SanityTest" source="C:\ApiAutomationRobo\Api_Automation_Robo\API\Test\SanityTest.robot">
+<test id="s1-t1" name="Test POST Request" line="64">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2024-12-28T11:04:07.375250" level="INFO">Creating Session using : alias=session1, url=https://reqres.in, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>session1</arg>
+<arg>${base_url}</arg>
+<arg>disable_warnings=1</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2024-12-28T11:04:07.374251" elapsed="0.000999"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2024-12-28T11:04:07.376251" level="INFO">${endpoint} = /api/users</msg>
+<var>${endpoint}</var>
+<arg>/api/users</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2024-12-28T11:04:07.376251" elapsed="0.000000"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-12-28T11:04:07.376728" level="INFO">${payload} = {'name': 'John Doe', 'job': 'Developer'}</msg>
+<var>${payload}</var>
+<arg>name=John Doe</arg>
+<arg>job=Developer</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-12-28T11:04:07.376728" elapsed="0.000000"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2024-12-28T11:04:08.381415" level="INFO">POST Request : url=https://reqres.in/api/users 
+ path_url=/api/users 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '40', 'Content-Type': 'application/json'} 
+ body=b'{"name": "John Doe", "job": "Developer"}' 
+ </msg>
+<msg time="2024-12-28T11:04:08.382413" level="INFO">POST Response : url=https://reqres.in/api/users 
+ status=201, reason=Created 
+ headers={'Date': 'Sat, 28 Dec 2024 05:34:08 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '87', 'Connection': 'keep-alive', 'Report-To': '{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1735364048&amp;sid=c4c9725f-1ab0-44d8-820f-430df2718e11&amp;s=fbIdx%2B1oCe0XNzp3EoaBoigESgD0lmsLh1nF9Mb7LME%3D"}]}', 'Reporting-Endpoints': 'heroku-nel=https://nel.heroku.com/reports?ts=1735364048&amp;sid=c4c9725f-1ab0-44d8-820f-430df2718e11&amp;s=fbIdx%2B1oCe0XNzp3EoaBoigESgD0lmsLh1nF9Mb7LME%3D', 'Nel': '{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Etag': 'W/"57-5x9XwUHdVI6i0iU0YrQRJf/wzkU"', 'Via': '1.1 vegur', 'CF-Cache-Status': 'DYNAMIC', 'Server': 'cloudflare', 'CF-RAY': '8f8f2df31fb946b9-BOM', 'server-timing': 'cfL4;desc="?proto=TCP&amp;rtt=481382&amp;min_rtt=24970&amp;rtt_var=325086&amp;sent=6&amp;recv=7&amp;lost=0&amp;retrans=0&amp;sent_bytes=2835&amp;recv_bytes=883&amp;delivery_rate=136733&amp;cwnd=208&amp;unsent_bytes=0&amp;cid=9bf26e1d56dcca46&amp;ts=286&amp;x=0"'} 
+ body={"name":"John Doe","job":"Developer","id":"702","createdAt":"2024-12-28T05:34:08.057Z"} 
+ </msg>
+<msg time="2024-12-28T11:04:08.382413" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>session1</arg>
+<arg>${endpoint}</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2024-12-28T11:04:07.377749" elapsed="1.004664"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${response.headers}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-12-28T11:04:08.383296" elapsed="0.001045"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-12-28T11:04:08.384341" elapsed="0.001986"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-12-28T11:04:08.386327" elapsed="0.001003"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2024-12-28T11:04:08.389330" level="INFO">${status_code} = 201</msg>
+<var>${status_code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2024-12-28T11:04:08.388329" elapsed="0.001001"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${status_code}</arg>
+<arg>201</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-12-28T11:04:08.389330" elapsed="0.000996"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2024-12-28T11:04:08.392330" level="INFO">${json_response} = {'name': 'John Doe', 'job': 'Developer', 'id': '702', 'createdAt': '2024-12-28T05:34:08.057Z'}</msg>
+<var>${json_response}</var>
+<arg>json.loads('''${response.content}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2024-12-28T11:04:08.391330" elapsed="0.001000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2024-12-28T11:04:08.394329" level="INFO">${name} = John Doe</msg>
+<var>${name}</var>
+<arg>${json_response}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2024-12-28T11:04:08.393329" elapsed="0.001000"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2024-12-28T11:04:08.395330" level="INFO">${job} = Developer</msg>
+<var>${job}</var>
+<arg>${json_response}</arg>
+<arg>job</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2024-12-28T11:04:08.394329" elapsed="0.001001"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${name}</arg>
+<arg>John Doe</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-12-28T11:04:08.395330" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${job}</arg>
+<arg>Developer</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2024-12-28T11:04:08.395330" elapsed="0.001479"/>
+</kw>
+<tag>Demo</tag>
+<status status="PASS" start="2024-12-28T11:04:07.372250" elapsed="1.024559"/>
+</test>
+<doc>Robot Framework Demo - POST Request Example</doc>
+<status status="PASS" start="2024-12-28T11:04:06.369619" elapsed="2.028223"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">Demo</stat>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="SanityTest">SanityTest</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
