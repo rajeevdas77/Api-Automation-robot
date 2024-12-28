@@ -80,7 +80,7 @@ Test POST Request
 
     # Validate the response status code
     ${status_code}=  Convert To String    ${response.status_code}
-    Should Be Equal  ${status_code}      201
+    Should Be Equal  ${status_code}      300
 
     # Validate response content
     ${json_response}=  Evaluate   json.loads('''${response.content}''')   json
